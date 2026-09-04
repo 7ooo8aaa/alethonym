@@ -16,27 +16,12 @@
         toggle.setAttribute("aria-expanded", "false");
       }
     });
+    document.documentElement.classList.add("nav-ready");
   }
 
   /* Current year in the footer */
   var y = document.querySelector("[data-year]");
   if (y) { y.textContent = String(new Date().getFullYear()); }
 
-  /* Subtle scroll reveal — respects reduced-motion, degrades to visible */
-  var reveals = document.querySelectorAll(".reveal");
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reveals.length) { return; }
-  if (reduce || !("IntersectionObserver" in window)) {
-    for (var i = 0; i < reveals.length; i++) { reveals[i].classList.add("is-visible"); }
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
-  reveals.forEach(function (el) { io.observe(el); });
+  /* Content remains visible without JavaScript; no reveal dependency. */
 })();

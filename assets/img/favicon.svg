@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Alethonym">
+  <rect width="64" height="64" rx="12" fill="#0F1724"/>
+  <path d="M32 14 L48 50 H41.6 L37.9 41.4 H26.1 L22.4 50 H16 Z M28.4 35.6 H35.6 L32 26.9 Z"
+        fill="#F5F7FB"/>
+</svg>

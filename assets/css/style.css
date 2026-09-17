@@ -449,15 +449,56 @@ table.compare thead th { border-top: 0; font-weight: 500; background: var(--bg-r
 table.compare tbody th { font-weight: 500; color: var(--ink); white-space: nowrap; }
 table.compare .todo { color: var(--ink-faint); font-style: italic; }
 
-.cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0; }
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem; margin: 1.5rem 0; }
 .cta {
   display: inline-flex; align-items: center; gap: 0.5rem;
   font-size: var(--t--1); letter-spacing: 0.1em;
   padding: 0.85rem 1.5rem; border-radius: 4px;
+  min-height: 48px;
   border: 1px solid var(--line); color: var(--ink);
 }
 .cta:hover { border-color: var(--line-bright); background: rgba(245, 247, 251, 0.04); }
 .cta--pending { border-style: dashed; color: var(--ink-faint); cursor: not-allowed; background: none; }
+
+/* CTA emphasis variants — same palette, no new colours.
+   --primary: filled, for the top-of-article CTA (first thing a searcher who
+   already knows what they want should be able to act on).
+   --arrow: adds a quiet direction cue without extra imagery/animation. */
+.cta--primary { background: var(--white); color: var(--navy); border-color: var(--white); font-weight: 500; }
+.cta--primary:hover { background: var(--gray); color: var(--navy); border-color: var(--gray); }
+.cta__arrow { display: inline-block; width: 1.1rem; height: 1px; background: currentColor; position: relative; }
+.cta__arrow::after {
+  content: ""; position: absolute; right: 0; top: -3px;
+  width: 6px; height: 6px; border-top: 1px solid currentColor; border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* CTA card — used mid-article (service intro) and end-of-article
+   (trip-prep). Heading / short description / merits / button / PR. */
+.cta-card {
+  border: 1px solid var(--line-soft); border-radius: 10px;
+  background: var(--bg-raise);
+  padding: clamp(1.4rem, 3.5vw, 2rem);
+  margin: 1.9rem 0;
+}
+.cta-card__label {
+  font-family: var(--display); font-size: 0.85rem; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--ink-soft); margin: 0 0 0.6rem;
+}
+.cta-card__title { font-weight: 500; font-size: var(--t-1); margin: 0 0 0.6rem; line-height: 1.5; }
+.cta-card__desc { color: var(--ink-soft); margin: 0 0 1rem; }
+.cta-card__merits {
+  list-style: none; margin: 0 0 1.4rem; padding: 0;
+  display: grid; gap: 0.55rem;
+}
+.cta-card__merits li {
+  position: relative; padding-left: 1.3em; color: var(--ink-soft); font-size: var(--t-0);
+}
+.cta-card__merits li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--gray);
+}
+.cta-card .cta-row { margin: 0; }
 
 .defs { display: grid; gap: 0; border-top: 1px solid var(--line-soft); margin-top: 0.5rem; }
 .defs > div { display: grid; gap: 0.2rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line-soft); }

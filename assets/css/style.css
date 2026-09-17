@@ -401,6 +401,7 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 3rem 0; }
 @media (min-width: 40em) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 52em) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 .card {
+  position: relative;
   background: var(--bg-raise); border: 1px solid var(--line-soft);
   border-radius: 8px; padding: clamp(1.25rem, 3vw, 1.85rem);
   display: flex; flex-direction: column; gap: 0.6rem;
@@ -409,6 +410,20 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 3rem 0; }
 .card:hover { border-color: var(--line-bright); transform: translateY(-3px); background: var(--bg-raise-2); }
 .card__kicker { font-family: var(--display); font-size: 0.95rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); }
 .card__title { font-weight: 400; font-size: var(--t-1); margin: 0; line-height: 1.6; }
+/* Make the whole card clickable/tappable via a "stretched link": the
+   title's real <a> gains an invisible ::after overlay sized to the whole
+   card. This keeps a single real, keyboard-focusable anchor (no nested
+   links, no JS) while letting a tap/click anywhere on the card body,
+   description, or whitespace open the article — not just the title text. */
+.card__title a {
+  position: relative;
+}
+.card__title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.card:has(.card__title a) { cursor: pointer; }
 .card__desc { color: var(--ink-soft); font-size: var(--t-0); margin: 0; }
 .card__meta { font-size: var(--t--1); color: var(--ink-faint); margin-top: auto; }
 .card--muted { opacity: 0.6; }
